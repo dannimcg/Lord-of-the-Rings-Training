@@ -1,6 +1,40 @@
 # Lord-of-the-Rings-Training
  Deep learning to create a model that can generate text that could theoretically be in the Lord of the Rings 
 
+## Neural Networks and Deep Learning
+
+### DEFINITIONS
+
+1. Natural Language Processing (NLP)
+    1. Natural language Processing manipulates human languages, this can be as simple as detecting repeated words or more complicated like in the case of this project of generating human-like text based on previous works.
+2. Neural Networks
+    1. A Neural Network is a series of algorithms that recognises underlying patterns and relationships within a set of data. Neural networks are a type of machine learning but the technique is often refered to as deep learning. A neural network can contain many nodes that are densely connected. An individual node or neuron may be conecced to several nodes in the layer beneath it and several in the layer above it. 
+3. Seq-2-Seq models
+    1. Sequence to Sequence (Seq-2-Seq) is about converting sequences from one domain into a sequence in another domain. For example, language translation works really well as a seq-2-seq model. These models are often used anytime we want to generate task. Typically we would use a recurrent neural network (RNN) to work with seq-2-seq. 
+4. Attention
+    1. Attension mechanisms are a type of input for Neural Networks that allows the network to focus on specific aspects of a complex imput. When an input is very complex, this can be broken down into manageble chunks that can then be paid attention to. This happens until the whole dataset is categorised. These models and mechanisms require continuous reinforcement to be effective. Attention mechanisms are common in both computer vision and Neural Machine Translation. 
+5. Transformers
+    1. A transformer in NLP is an architecture that solves solves sequence-to-sequence tasks for long-range dependency instead of attention based seq-2-seq models. 
+
+
+
+<br><br>
+### Transformers and language modelling
+<center>
+<br>
+You can read about the origin and proposal of these archetictures in the paper <a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a>. The novel architecture allows for long-range dependency unlike seq-2-seq models which have challenges with this and parallelization. These issues are addressed by transformers. The limitation of Transformers is that Attention can only be used on fixed lengths. A text has to be split into a certain number of segments before it can be fed into the system. This chunking can cause context fragmentation. Meaning can be lost if a sentence is split in two, or some other boundary.  
+<br>
+<img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2019/06/Screenshot-from-2019-06-17-19-53-10.png">
+<br> <i>Figure 1: Transformer Architecture</i></center>
+<br><br>
+
+Transformers in the case of Language Modelling has been around since 2018 <a href ="https://arxiv.org/abs/1808.04444">(Al-Rfou 2018)</a>. Transformers are particularly successful in text generation where the long-term context matters for the readability and improvement of AI-text. It allows the text to become more Human. This computation however is quite intensive. For this project a NVIDIA GTX-1080 was used, and I think it would be remiss to try this without a GPU.  
+
+The HuggingFace transformer package was used for this project which can be found here https://github.com/huggingface/transformers and installed using
+> pip install transformers
+
+For this project we ended up using the GPT-2 transformer from OpenAI. 
+
 ## Observations and outcomes
 You can view my testing of the model in the jupyter notebook 'testing.ipynb'. The model seemed to be able to group characters that do appear commonly together well. Scenes with Legolas often contained Aragorn and Gimli, and scenes with Frodo often contained Sam and Gandalf. There was a clear acknowledgement of Sauron and Saruman being the villains throughout the story, unless they were involved in the prompt and then it was a little bit harder -- Including one paragraph where Sauron is escorting Frodo!
 
@@ -19,7 +53,7 @@ You can see that the text does read like it could be in Tolkien's work, but ther
 From there I decided to mess with the temperature and P values to see how much to iron out.
 
 When temperature and or p reached < 0.6, the repitition in the text was very high.
-
+<center> <img src="https://i.ytimg.com/vi/h8ciZV9zk-A/maxresdefault.jpg"> </center>
 ### Increasing Repetition penalty
 
 Using the same prompt with a lower temperature and p_value but a repetition_penalty of 1.2 the following text was generated
